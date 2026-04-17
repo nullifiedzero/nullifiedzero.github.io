@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Space Analytics</title>
+    <meta name="description" content="Reach out to the data engineering team with inquiries or bug reports.">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="data.html">Data View</a>
+        <a href="contact.html" class="active">Contact Hub</a>
+    </nav>
+    <main>
+        <h1>Transmission Protocol Setup</h1>
+        <p>Provide detailed feedback or report technical anomalies directly to the data engineering staff. Ensure all fields are properly encoded before initialization.</p>
+
+        <form action="#" method="post">
+            <div>
+                <input type="text" id="operativeName" name="name" placeholder="Assigned Call Sign (Name)" required>
+            </div>
+            <div>
+                <select id="priority" name="priority">
+                    <option value="low">Standard Inquiry - Low Priority</option>
+                    <option value="medium">Analytics Discrepancy - Medium Priority</option>
+                    <option value="high">System Failure - High Priority</option>
+                </select>
+            </div>
+            <div>
+                <textarea id="transmissionData" name="message" rows="5" placeholder="Enter transmission payload here..." required></textarea>
+            </div>
+            <button type="submit">Establish Secure Uplink</button>
+        </form>
+    </main>
+
+    <script src="./js/analytics.js"></script>
+</body>
+</html>

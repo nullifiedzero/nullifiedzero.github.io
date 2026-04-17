@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GA4 Tracking Demo</title>
+
+  <!-- Google tag USE YOUR OWN PROVIDED TAG  -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX'); // These tag values should match in both scripts.
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .spacer {
+      height: 1500px; /* for scroll testing */
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>GA4 Simple Tracking</h1>
+  <p> See the HTML and Javascript for the code</p>
+
+  <!-- BUTTON CLICK -->
+  <section>
+    <h2>Button Click</h2>
+	<p> This button, on click will send its ID to Google Analytics to let it know, hey someone clicked me! </p>
+    <button id="signupBtn">Sign Up</button>
+  </section>
+
+  <!-- LINK CLICK -->
+  <section>
+    <h2>Link Click</h2>
+	<p> Just like the button, same thing for navigation. The href/html site send will be tracked as well. </p>
+    <a href="https://example.com" target="_blank">Visit Example</a>
+  </section>
+
+  <!-- FORM -->
+  <section>
+    <h2>Form Submission</h2>
+	<p> The content inside the text box, and button name are being tracked. See the javascript for this page </p>
+    <form id="contactForm">
+      <input type="text" placeholder="Your Name" required />
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- VIDEO -->
+  <section>
+    <h2>Video Tracking</h2>
+	<p> Dont ask what is this video, its something from w3schools..... BUT! We're tracking when it was played, ended, even if it was only half way finished </p>
+    <video width="320" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- SCROLL AREA -->
+  <section>
+    <h2>Scroll Tracking</h2>
+    <p>Scroll down to trigger scroll depth events.</p>
+	<p> Depending on how much you scroll, will trigger a different scroll event. Currently, 25%, 50%, 75% and 100% depths of scroll are being tracked </p>
+    <div class="spacer"></div>
+  </section>
+
+  <script>
+  
+  
+    // BUTTON CLICK
+    document.getElementById("signupBtn").addEventListener("click", function () {
+      gtag("event", "button_click", {
+        event_category: "engagement",
+        event_label: "signup_button"
+      });
+    });
+
+    // LINK CLICK
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", function () {
+        gtag("event", "link_click", {
+          event_category: "navigation",
+          event_label: this.href
+        });
+      });
+    });
+
+    // FORM SUBMIT
+    document.getElementById("contactForm").addEventListener("submit", function () {
+      gtag("event", "form_submit", {
+        event_category: "engagement",
+        event_label: "contact_form"
+      });
+    });
+
+    // VIDEO EVENTS
+    const video = document.querySelector("video");
+
+    video.addEventListener("play", () => {
+      gtag("event", "video_play", { event_category: "media" });
+    });
+
+    video.addEventListener("pause", () => {
+      gtag("event", "video_pause", { event_category: "media" });
+    });
+
+    video.addEventListener("ended", () => {
+      gtag("event", "video_complete", { event_category: "media" });
+    });
+
+    // TIME ON PAGE
+    let startTime = Date.now();
+
+    window.addEventListener("beforeunload", function () {
+      let timeSpent = Math.round((Date.now() - startTime) / 1000);
+
+      gtag("event", "time_on_page", {
+        event_category: "engagement",
+        value: timeSpent
+      });
+    });
+
+    // SCROLL DEPTH
+    let scrollTracked = {
+      25: false,
+      50: false,
+      75: false,
+      100: false
+    };
+
+    window.addEventListener("scroll", function () {
+      let scrollPercent = Math.round(
+        (window.scrollY + window.innerHeight) / document.body.scrollHeight * 100
+      );
+
+      [25, 50, 75, 100].forEach(percent => {
+        if (scrollPercent >= percent && !scrollTracked[percent]) {
+          scrollTracked[percent] = true;
+
+          gtag("event", "scroll_depth", {
+            event_category: "engagement",
+            event_label: percent + "%"
+          });
+        }
+      });
+    });
+
+    // PAGE VISIBILITY
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        gtag("event", "tab_hidden", { event_category: "engagement" });
+      } else {
+        gtag("event", "tab_visible", { event_category: "engagement" });
+      }
+    });
+
+    // ERROR TRACKING
+    window.addEventListener("error", function (event) {
+      gtag("event", "javascript_error", {
+        event_category: "error",
+        event_label: event.message
+      });
+    });
+
+    // CUSTOM EVENT EXAMPLE
+    function addToCart(productName, price) {
+      gtag("event", "add_to_cart", {
+        currency: "USD",
+        value: price,
+        items: [
+          {
+            item_name: productName,
+            price: price
+          }
+        ]
+      });
+    }
+
+    // Example trigger (for demo)
+    setTimeout(() => {
+      addToCart("Demo Product", 19.99);
+    }, 5000);
+
+  </script>
+
+</body>
+</html>

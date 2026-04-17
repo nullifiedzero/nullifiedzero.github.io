@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data | Space Analytics</title>
+    <meta name="description" content="Tabular representation of core telemetry and metrics from the platform.">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="data.html" class="active">Data View</a>
+        <a href="contact.html">Contact Hub</a>
+    </nav>
+    <main>
+        <h1>Core Telemetry Logs</h1>
+        <p>Review the aggregated session data retrieved from recent user interactions. The platform automatically tracks pathways and behaviors.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Terminal</th>
+                    <th>Unique Views</th>
+                    <th>Avg Session (secs)</th>
+                    <th>Bounce Rate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Home (index)</td>
+                    <td>1,245</td>
+                    <td>45.2</td>
+                    <td>42%</td>
+                </tr>
+                <tr>
+                    <td>Data View</td>
+                    <td>892</td>
+                    <td>120.5</td>
+                    <td>18%</td>
+                </tr>
+                <tr>
+                    <td>Contact Hub</td>
+                    <td>314</td>
+                    <td>35.1</td>
+                    <td>76%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form action="#" method="post">
+            <button type="submit" style="background: #10b981;">Export as CSV Report</button>
+        </form>
+    </main>
+
+    <script src="./js/analytics.js"></script>
+</body>
+</html>
