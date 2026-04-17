@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="data.html" class="active">Data View</a>
-        <a href="contact.html">Contact Hub</a>
+    <nav id="main-navigation">
+        <a href="./index.html">Home</a>
+        <a href="./data.html" class="active">Data View</a>
+        <a href="./contact.html">Contact Hub</a>
     </nav>
     <main>
         <h1>Core Telemetry Logs</h1>
         <p>Review the aggregated session data retrieved from recent user interactions. The platform automatically tracks pathways and behaviors.</p>
 
-        <table>
+        <table id="telemetryTable">
             <thead>
                 <tr>
                     <th>Terminal</th>
@@ -54,5 +54,25 @@
     </main>
 
     <script src="./js/analytics.js"></script>
+    <script>
+        // Randomize table data on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const table = document.getElementById('telemetryTable');
+            if (table) {
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length === 4) {
+                        // Unique Views: 500 to 50,000
+                        cells[1].innerText = Math.floor(Math.random() * 49500 + 500).toLocaleString();
+                        // Avg Session: 15.0 to 240.0 secs
+                        cells[2].innerText = (Math.random() * 225 + 15).toFixed(1);
+                        // Bounce Rate: 15% to 80%
+                        cells[3].innerText = Math.floor(Math.random() * 65 + 15) + '%';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
