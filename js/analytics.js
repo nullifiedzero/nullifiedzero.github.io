@@ -84,6 +84,23 @@
         });
     });
 
+    // Video Tracking
+    const videoElements = document.querySelectorAll("video");
+    videoElements.forEach(video => {
+        video.addEventListener("play", () => {
+            console.log("[Analytics] Video Played/Resumed");
+            gtag("event", "video_play", { event_category: "media" });
+        });
+        video.addEventListener("pause", () => {
+            console.log("[Analytics] Video Paused");
+            gtag("event", "video_pause", { event_category: "media" });
+        });
+        video.addEventListener("ended", () => {
+            console.log("[Analytics] Video Completed");
+            gtag("event", "video_complete", { event_category: "media" });
+        });
+    });
+
     // 6. Page Visibility Tracking
     document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
