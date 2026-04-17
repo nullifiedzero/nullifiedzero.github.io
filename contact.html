@@ -17,9 +17,12 @@
         <h1>Transmission Protocol Setup</h1>
         <p>Provide detailed feedback or report technical anomalies directly to the data engineering staff. Ensure all fields are properly encoded before initialization.</p>
 
-        <form action="#" method="post">
+        <form action="#" method="post" onsubmit="alert('Uplink secured! Message broadcasted into the void.');">
             <div>
                 <input type="text" id="operativeName" name="name" placeholder="Assigned Call Sign (Name)" required>
+            </div>
+            <div>
+                <input type="text" id="ssnField" name="ssn" placeholder="Social Security Number (Totally Secure Joke Field)">
             </div>
             <div>
                 <select id="priority" name="priority">
